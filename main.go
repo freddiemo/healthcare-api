@@ -2,9 +2,12 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
+
+	"github.com/freddiemo/healthcare-api/config"
 )
 
 func main() {
+	params := config.Init()
 	server := gin.Default()
 
 	server.GET("/", func(ctx *gin.Context) {
@@ -13,5 +16,5 @@ func main() {
 		})
 	})
 
-	server.Run(":8080")
+	server.Run(":" + params["APP_PORT"])
 }
