@@ -8,6 +8,7 @@ import (
 
 type DiagnosticsRepository interface {
 	Save(diagnostic model.Diagnostic) (model.Diagnostic, error)
+	Find() ([]model.Diagnostic, error)
 }
 
 type diagnosticsRepo struct {
@@ -26,4 +27,13 @@ func (diagnosticRepo *diagnosticsRepo) Save(diagnostic model.Diagnostic) (model.
 	}
 
 	return diagnostic, nil
+}
+
+func (diagnosticRepo *diagnosticsRepo) Find() ([]model.Diagnostic, error) {
+	var diagnostics []model.Diagnostic
+	if result := diagnosticRepo.db.Joins("Prescription").Find(&diagnostics); result.Error != nil {
+		return diagnostics, result.Error
+	}
+
+	return diagnostics, nil
 }

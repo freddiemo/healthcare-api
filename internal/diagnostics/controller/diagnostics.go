@@ -9,6 +9,7 @@ import (
 
 type DiagnosticsController interface {
 	Save(ctx *gin.Context) (model.Diagnostic, error)
+	Find() ([]model.Diagnostic, error)
 }
 
 type diagnosticsController struct {
@@ -33,4 +34,14 @@ func (controller *diagnosticsController) Save(ctx *gin.Context) (model.Diagnosti
 	}
 
 	return diagnostic, nil
+}
+
+func (controller *diagnosticsController) Find() ([]model.Diagnostic, error) {
+	var diagnostics []model.Diagnostic
+	diagnostics, err := controller.diagnosticService.Find()
+	if err != nil {
+		return diagnostics, err
+	}
+
+	return diagnostics, nil
 }

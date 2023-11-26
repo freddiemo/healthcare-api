@@ -30,3 +30,14 @@ func (api *HealthcareAPI) SaveDiagnostic(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, diagnostic)
 	}
 }
+
+func (api *HealthcareAPI) FindDiagnostics(ctx *gin.Context) {
+	diagnostics, err := api.diagnosticsController.Find()
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, &Response{
+			Message: err.Error(),
+		})
+	} else {
+		ctx.JSON(http.StatusOK, diagnostics)
+	}
+}
