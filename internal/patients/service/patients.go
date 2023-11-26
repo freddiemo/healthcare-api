@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/freddiemo/healthcare-api/modules/patients/model"
-	"github.com/freddiemo/healthcare-api/modules/patients/repository"
+	"github.com/freddiemo/healthcare-api/internal/patients/model"
+	"github.com/freddiemo/healthcare-api/internal/patients/repository"
 )
 
 type PatientService interface {
@@ -16,7 +16,6 @@ type patientServ struct {
 func NewPatientService(
 	repository repository.PatientRepository,
 ) PatientService {
-
 	return &patientServ{
 		patientRepository: repository,
 	}

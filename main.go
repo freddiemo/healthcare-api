@@ -8,6 +8,6 @@ import (
 
 func main() {
 	params := config.Init()
-	db.Init(params)
-	api.Init(params)
+	db := db.Init(params)
+	api.Init(params, db)
 }
