@@ -1,19 +1,17 @@
 package api
 
 import (
-	"github.com/gin-gonic/gin"
-
 	"fmt"
 	"io"
 	"log"
 	"os"
-)
 
-var server = gin.Default()
+	"github.com/gin-gonic/gin"
+)
 
 func Init(params map[string]string) {
 	setupLogOutput(params["APP_NAME"])
-
+	server := gin.Default()
 	server.GET("/", func(ctx *gin.Context) {
 		ctx.JSON(200, gin.H{
 			"message": "OK!",
