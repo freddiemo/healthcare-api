@@ -3,7 +3,7 @@ package repository
 import (
 	"gorm.io/gorm"
 
-	"github.com/freddiemo/healthcare-api/modules/patients/model"
+	"github.com/freddiemo/healthcare-api/internal/patients/model"
 )
 
 type PatientRepository interface {

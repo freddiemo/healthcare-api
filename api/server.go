@@ -7,16 +7,25 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
+
+	diagnosticsCtrl "github.com/freddiemo/healthcare-api/internal/diagnostics/controller"
+	diagnosticsRepo "github.com/freddiemo/healthcare-api/internal/diagnostics/repository"
+	diagnosticsServ "github.com/freddiemo/healthcare-api/internal/diagnostics/service"
 )
 
-func Init(params map[string]string) {
+func Init(params map[string]string, db *gorm.DB) {
 	setupLogOutput(params["APP_NAME"])
+
+	var diagnosticsRepository diagnosticsRepo.DiagnosticsRepository = diagnosticsRepo.NewDiagnosticsRepository(db)
+	var diagnosticsService diagnosticsServ.DiagnosticsService = diagnosticsServ.NewDiagnosticsService(diagnosticsRepository)
+	var diagnosticsController diagnosticsCtrl.DiagnosticsController = diagnosticsCtrl.NewDiagnosticsController(diagnosticsService)
+
 	server := gin.Default()
-	server.GET("/", func(ctx *gin.Context) {
-		ctx.JSON(200, gin.H{
-			"message": "OK!",
-		})
-	})
+	healthcareAPI := NewHealthcareAPI(
+		diagnosticsController,
+	)
+	getRegisterRoutes(healthcareAPI, server)
 
 	server.Run(fmt.Sprintf(":%s", params["APP_PORT"]))
 }
