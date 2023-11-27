@@ -30,6 +30,7 @@ type DiagnosticWithPatient struct {
 }
 
 type DiagnosticQuery struct {
-	FirstName *string `form:"firstName" binding:"omitempty,min=3,max=20"`
-	LastName  *string `form:"lastName" binding:"omitempty,min=3,max=20"`
+	FirstName *string    `form:"firstName" binding:"omitempty,min=3,max=20"`
+	LastName  *string    `form:"lastName" binding:"omitempty,min=3,max=20"`
+	Date      *time.Time `form:"date" time_format:"2006-01-02"`
 }

@@ -39,9 +39,13 @@ func (diagnosticRepo *diagnosticsRepo) Find(diagnosticQuery *model.DiagnosticQue
 	if diagnosticQuery.LastName != nil {
 		queriesPatient = queriesPatient.Where("UPPER(last_name) = ?", strings.ToUpper(*diagnosticQuery.LastName))
 	}
+	queryDiagnostic := diagnosticRepo.db.Where("TRUE")
+	if diagnosticQuery.Date != nil {
+		queryDiagnostic = queryDiagnostic.Where("date_time BETWEEN ? AND ? ", diagnosticQuery.Date, diagnosticQuery.Date.AddDate(0, 0, 1))
+	}
 
 	var diagnostics []model.DiagnosticWithPatient
-	if result := diagnosticRepo.db.Table("diagnostics").Preload("Prescription").InnerJoins("Patient", queriesPatient).Find(&diagnostics); result.Error != nil {
+	if result := diagnosticRepo.db.Table("diagnostics").Preload("Prescription").InnerJoins("Patient", queriesPatient).Where(queryDiagnostic).Find(&diagnostics); result.Error != nil {
 		return diagnostics, result.Error
 	}
 
