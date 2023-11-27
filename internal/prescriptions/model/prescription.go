@@ -7,8 +7,11 @@ import (
 )
 
 type Prescription struct {
-	gorm.Model
-	Description  string    `gorm:"not null"`
-	DueDate      time.Time `gorm:"not null"`
+	ID           uint           `gorm:"primaryKey"`
+	CreatedAt    time.Time      `json:"-"`
+	UpdatedAt    time.Time      `json:"-"`
+	DeletedAt    gorm.DeletedAt `gorm:"index" json:"-"`
+	Description  string         `binding:"required" gorm:"not null"`
+	DueDate      time.Time      `binding:"required" gorm:"not null"`
 	DiagnosticID uint
 }

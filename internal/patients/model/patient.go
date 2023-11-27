@@ -1,17 +1,19 @@
 package model
 
 import (
-	"gorm.io/gorm"
+	"time"
 
-	diagnostics "github.com/freddiemo/healthcare-api/internal/diagnostics/model"
+	"gorm.io/gorm"
 )
 
 type Patient struct {
-	gorm.Model
-	FirstName   string `gorm:"type:varchar(32);not null"`
-	LastName    string `gorm:"type:varchar(32);not null"`
-	Email       string `gorm:"type:varchar(32);not null;UNIQUE" validate:"is-email"`
-	DocumentID  string `gorm:"not null;UNIQUE"`
-	Phone       string `gorm:"not null"`
-	Diagnostics []diagnostics.Diagnostic
+	ID         uint           `gorm:"primaryKey"`
+	CreatedAt  time.Time      `json:"-"`
+	UpdatedAt  time.Time      `json:"-"`
+	DeletedAt  gorm.DeletedAt `gorm:"index" json:"-"`
+	FirstName  string         `gorm:"type:varchar(32);not null"`
+	LastName   string         `gorm:"type:varchar(32);not null"`
+	Email      string         `gorm:"type:varchar(32);not null;UNIQUE"`
+	DocumentID string         `gorm:"not null;UNIQUE"`
+	Phone      string         `gorm:"not null"`
 }

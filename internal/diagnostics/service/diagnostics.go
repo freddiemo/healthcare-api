@@ -6,8 +6,8 @@ import (
 )
 
 type DiagnosticsService interface {
-	Save(model.Diagnostic) (model.Diagnostic, error)
-	Find() ([]model.Diagnostic, error)
+	Save(*model.Diagnostic) error
+	Find(*model.DiagnosticQuery) ([]model.DiagnosticWithPatient, error)
 }
 
 type diagnosticsServ struct {
@@ -22,18 +22,17 @@ func NewDiagnosticsService(
 	}
 }
 
-func (service *diagnosticsServ) Save(diagnostic model.Diagnostic) (model.Diagnostic, error) {
-	var diagnosticSaved model.Diagnostic
-	if diagnosticSaved, err := service.diagnosticsRepository.Save(diagnostic); err != nil {
-		return diagnosticSaved, err
+func (service *diagnosticsServ) Save(diagnostic *model.Diagnostic) error {
+	if err := service.diagnosticsRepository.Save(diagnostic); err != nil {
+		return err
 	}
 
-	return diagnosticSaved, nil
+	return nil
 }
 
-func (service *diagnosticsServ) Find() ([]model.Diagnostic, error) {
-	var diagnostics []model.Diagnostic
-	diagnostics, err := service.diagnosticsRepository.Find()
+func (service *diagnosticsServ) Find(diagnosticQuery *model.DiagnosticQuery) ([]model.DiagnosticWithPatient, error) {
+	var diagnostics []model.DiagnosticWithPatient
+	diagnostics, err := service.diagnosticsRepository.Find(diagnosticQuery)
 	if err != nil {
 		return diagnostics, err
 	}
