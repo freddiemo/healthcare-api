@@ -5,9 +5,10 @@ import (
 )
 
 func addHealthcareRoutes(rg *gin.RouterGroup, healthcareAPI *HealthcareAPI) {
-	clients := rg.Group("/diagnostics")
+	diagnostics := rg.Group("/diagnostics")
 	{
-		clients.POST("/", healthcareAPI.SaveDiagnostic)
+		diagnostics.POST("/", healthcareAPI.SaveDiagnostic)
+		diagnostics.GET("/", healthcareAPI.FindDiagnostics)
 	}
 }
 

@@ -9,6 +9,7 @@ import (
 
 type DiagnosticsController interface {
 	Save(ctx *gin.Context) (model.Diagnostic, error)
+	Find(ctx *gin.Context) ([]model.DiagnosticWithPatient, error)
 }
 
 type diagnosticsController struct {
@@ -27,10 +28,24 @@ func (controller *diagnosticsController) Save(ctx *gin.Context) (model.Diagnosti
 		return model.Diagnostic{}, err
 	}
 
-	diagnostic, err := controller.diagnosticService.Save(diagnostic)
-	if err != nil {
+	if err := controller.diagnosticService.Save(&diagnostic); err != nil {
 		return model.Diagnostic{}, err
 	}
 
 	return diagnostic, nil
+}
+
+func (controller *diagnosticsController) Find(ctx *gin.Context) ([]model.DiagnosticWithPatient, error) {
+	queryParams := model.DiagnosticQuery{}
+	if err := ctx.ShouldBindQuery(&queryParams); err != nil {
+		return nil, err
+	}
+
+	var diagnostics []model.DiagnosticWithPatient
+	diagnostics, err := controller.diagnosticService.Find(&queryParams)
+	if err != nil {
+		return diagnostics, err
+	}
+
+	return diagnostics, nil
 }
