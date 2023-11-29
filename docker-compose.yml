@@ -1,0 +1,46 @@
+version: '3.3'
+
+services:
+  healthcaredb:
+    image: postgres:latest
+    container_name: healthcaredb
+    hostname: healthcaredb
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 5433:5432
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - healthcare
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 3s
+      timeout: 5s
+      retries: 5
+  healthcare-api:
+    depends_on:
+      healthcaredb:
+        condition: service_healthy
+    build:
+      context: .
+    container_name: healthcare-api
+    hostname: healthcare-server
+    ports:
+      - 8081:8081
+    volumes:
+      - .:/app
+    networks:
+      - healthcare
+    deploy:
+      restart_policy:
+        condition: on-failure 
+
+volumes:
+  pg_data:
+
+networks:
+  healthcare:
+    driver: bridge
