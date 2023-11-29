@@ -1,0 +1,42 @@
+version: '3.3'
+
+services:
+  healthcaredb-test:
+    image: postgres:latest
+    container_name: healthcaredb-test
+    hostname: healthcaredb-test
+    environment:
+      POSTGRES_DB: ${DB_NAME_TEST}
+      POSTGRES_USER: ${DB_USER_TEST}
+      POSTGRES_PASSWORD: ${DB_PASSWORD_TEST}
+      POSTGRES_HOST: ${DB_HOST_TEST}
+    restart: on-failure
+    ports:
+      - 5434:5432
+    networks:
+      - healthcare-test
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER_TEST} -d ${DB_NAME_TEST}"]
+      interval: 3s
+      timeout: 5s
+      retries: 5
+  healthcare-api:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.test
+    depends_on:
+      healthcaredb-test:
+        condition: service_healthy
+    container_name: healthcare-api-test
+    hostname: healthcare-server-test
+    volumes:
+      - .:/app
+    networks:
+      - healthcare-test
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+networks:
+  healthcare-test:
+    driver: bridge
