@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.4'
 
 services:
   healthcaredb:
@@ -29,14 +29,38 @@ services:
     container_name: healthcare-api
     hostname: healthcare-server
     ports:
-      - 8081:8081
+      - ${APP_PORT}:${APP_PORT}
     volumes:
       - .:/app
     networks:
       - healthcare
     deploy:
       restart_policy:
-        condition: on-failure 
+        condition: on-failure
+    healthcheck:
+      test: ["CMD-SHELL", "curl --silent --fail http://localhost:${APP_PORT}/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 2
+      start_period: 10s
+  healthcare-api-integration:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.integration
+    depends_on:
+      healthcare-api:
+        condition: service_healthy
+    container_name: healthcare-api-integration
+    hostname: healthcare-server-integration
+    volumes:
+      - .:/app
+    ports:
+      - ${APP_INTEGRATION_PORT}:${APP_INTEGRATION_PORT}
+    networks:
+      - healthcare
+    deploy:
+      restart_policy:
+        condition: on-failure
 
 volumes:
   pg_data:
