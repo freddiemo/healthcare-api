@@ -6,7 +6,10 @@ import (
 	"log"
 	"os"
 
+	"github.com/freddiemo/healthcare-api/api/docs"
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"gorm.io/gorm"
 
 	diagnosticsCtrl "github.com/freddiemo/healthcare-api/internal/diagnostics/controller"
@@ -17,6 +20,16 @@ import (
 func Init(params map[string]string, db *gorm.DB) {
 	setupLogOutput(params["APP_NAME"])
 	server := GetServer(db)
+
+	server.GET("/swagger/*any", func(ctx *gin.Context) {
+		docs.SwaggerInfo.Host = ctx.Request.Host
+		ginSwagger.WrapHandler(swaggerFiles.Handler)(ctx)
+	})
+
+	server.GET("/health", func(c *gin.Context) {
+		c.String(200, "Healthy")
+	})
+
 	server.Run(fmt.Sprintf(":%s", params["APP_PORT"]))
 }
 
