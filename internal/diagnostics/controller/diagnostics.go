@@ -24,7 +24,7 @@ func NewDiagnosticsController(diagnosticService service.DiagnosticsService) Diag
 
 func (controller *diagnosticsController) Save(ctx *gin.Context) (model.Diagnostic, error) {
 	var diagnostic model.Diagnostic
-	if err := ctx.ShouldBind(&diagnostic); err != nil {
+	if err := ctx.ShouldBindJSON(&diagnostic); err != nil {
 		return model.Diagnostic{}, err
 	}
 
