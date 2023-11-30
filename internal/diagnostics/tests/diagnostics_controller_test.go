@@ -95,7 +95,6 @@ var _ = Describe("DiagnosticController", func() {
 
 			It("body should have equivalent values", func() {
 				m, _ := utilstests.Deserialize(response.Body.String())
-				fmt.Println("m:", m)
 				Expect(m["ID"]).ToNot(BeNil())
 				Expect(m["diagnostic"]).To(Equal(DIAGNOSTIC))
 				Expect(m["patientID"]).To(BeEquivalentTo(PATIENTID))

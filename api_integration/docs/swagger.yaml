@@ -1,0 +1,121 @@
+basePath: /v1
+definitions:
+  api_integration.DiagnosticRequest:
+    properties:
+      dateTime:
+        type: string
+      diagnostic:
+        minLength: 10
+        type: string
+      patientID:
+        type: integer
+    required:
+    - dateTime
+    - diagnostic
+    - patientID
+    type: object
+  api_integration.DiagnosticResponseWithPatient:
+    properties:
+      dateTime:
+        type: string
+      diagnostic:
+        type: string
+      id:
+        type: integer
+      patient:
+        $ref: '#/definitions/api_integration.PatientResponse'
+    type: object
+  api_integration.PatientResponse:
+    properties:
+      documentID:
+        type: string
+      email:
+        type: string
+      firstName:
+        type: string
+      id:
+        type: integer
+      lastName:
+        type: string
+      phone:
+        type: string
+    type: object
+  api_integration.Response:
+    properties:
+      message:
+        type: string
+    type: object
+  model.Diagnostic:
+    properties:
+      dateTime:
+        type: string
+      diagnostic:
+        minLength: 10
+        type: string
+      id:
+        type: integer
+      patientID:
+        type: integer
+      prescription:
+        $ref: '#/definitions/model.Prescription'
+    required:
+    - dateTime
+    - diagnostic
+    - patientID
+    type: object
+  model.Prescription:
+    properties:
+      description:
+        type: string
+      diagnosticID:
+        type: integer
+      dueDate:
+        type: string
+      id:
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: A Healthcare integration service API in Go using Gin
+  title: Healthcare API Integration
+  version: "1.0"
+paths:
+  /diagnostics:
+    get:
+      description: List dignostic data from bd.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/api_integration.DiagnosticResponseWithPatient'
+            type: array
+      summary: List diagnostics
+      tags:
+      - diagnostics
+    post:
+      description: Save diagnostic data in bd.
+      parameters:
+      - description: Create diagnostic
+        in: body
+        name: diagnostic
+        required: true
+        schema:
+          $ref: '#/definitions/api_integration.DiagnosticRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Diagnostic'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/api_integration.Response'
+      summary: Create diagnostic
+      tags:
+      - diagnostics
+swagger: "2.0"
