@@ -14,10 +14,10 @@ type Diagnostic struct {
 	CreatedAt    time.Time                  `json:"-"`
 	UpdatedAt    time.Time                  `json:"-"`
 	DeletedAt    gorm.DeletedAt             `gorm:"index" json:"-"`
-	DateTime     *time.Time                 `binding:"required" gorm:"not null"`
-	Diagnostic   string                     `binding:"required" gorm:"not null"`
-	Prescription prescriptions.Prescription `gorm:"foreignKey:DiagnosticID;references:ID"`
-	PatientID    uint                       `binding:"required" gorm:"not null"`
+	DateTime     *time.Time                 `binding:"required" gorm:"not null" json:"dateTime"`
+	Diagnostic   string                     `binding:"required,min=10" gorm:"not null" json:"diagnostic"`
+	Prescription prescriptions.Prescription `gorm:"foreignKey:DiagnosticID;references:ID" json:",omitempty"`
+	PatientID    uint                       `binding:"required" gorm:"not null" json:"patientID"`
 }
 
 type DiagnosticWithPatient struct {
