@@ -1,0 +1,292 @@
+{
+	"info": {
+		"_postman_id": "91b90c71-f579-4440-99eb-0a559b8cc8f7",
+		"name": "HealthcareAPIIntegrationCollection",
+		"description": "API Integration.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19740074"
+	},
+	"item": [
+		{
+			"name": "Diagnostics",
+			"item": [
+				{
+					"name": "Create New Diagnostic",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dateTime\": \"2023-10-18T15:04:05Z\",\n    \"diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n    \"patientID\": 2\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v1",
+								"diagnostics",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create New Diagnostic",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"dateTime\": \"2023-10-18T15:04:05Z\",\n    \"diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n    \"patientID\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v1",
+										"diagnostics",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 05:26:47 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "123"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ID\": 62,\n    \"DateTime\": \"2023-10-18T15:04:05Z\",\n    \"Diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n    \"PatientID\": 2\n}"
+						},
+						{
+							"name": "Create New Diagnostic Without DateTime",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n    \"patientID\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v1",
+										"diagnostics",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 05:32:49 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "133"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ID\": 64,\n    \"DateTime\": \"2023-11-30T05:32:49.346843292Z\",\n    \"Diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n    \"PatientID\": 2\n}"
+						},
+						{
+							"name": "Create New Diagnostic With Different Format time",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"dateTime\": \"2023-01-02 3:04PM\",\n    \"diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n    \"patientID\": 2\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v1",
+										"diagnostics",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 30 Nov 2023 05:33:51 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "123"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ID\": 65,\n    \"DateTime\": \"2023-01-02T15:04:00Z\",\n    \"Diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n    \"PatientID\": 2\n}"
+						}
+					]
+				},
+				{
+					"name": "List Diagnostics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v1",
+								"diagnostics",
+								""
+							]
+						},
+						"description": "LIst Diagnostics."
+					},
+					"response": [
+						{
+							"name": "List Diagnostics",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v1",
+										"diagnostics",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 28 Nov 2023 01:09:34 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "825"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"ID\": 1,\n        \"DateTime\": \"2023-10-13T15:04:05Z\",\n        \"Diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n        \"Prescription\": {\n            \"ID\": 1,\n            \"Description\": \"El paciente debe tomar acetaminofen cada 8 horas durante 1 semana\",\n            \"DueDate\": \"2023-10-20T15:04:05Z\",\n            \"DiagnosticID\": 1\n        },\n        \"Patient\": {\n            \"ID\": 1,\n            \"FirstName\": \"Tavares\",\n            \"LastName\": \"Murphy\",\n            \"Email\": \"bjrPGeJ@KniHdDd.top\",\n            \"DocumentID\": \"5508819842494668\",\n            \"Phone\": \"+892411057638\"\n        }\n    },\n    {\n        \"ID\": 2,\n        \"DateTime\": \"2023-10-13T15:04:05Z\",\n        \"Diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n        \"Prescription\": {\n            \"ID\": 2,\n            \"Description\": \"El paciente debe tomar acetaminofen cada 8 horas durante 1 semana\",\n            \"DueDate\": \"2023-10-20T15:04:05Z\",\n            \"DiagnosticID\": 2\n        },\n        \"Patient\": {\n            \"ID\": 1,\n            \"FirstName\": \"Tavares\",\n            \"LastName\": \"Murphy\",\n            \"Email\": \"bjrPGeJ@KniHdDd.top\",\n            \"DocumentID\": \"5508819842494668\",\n            \"Phone\": \"+892411057638\"\n        }\n    }\n]"
+						},
+						{
+							"name": "Empty list",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v1",
+										"diagnostics",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 28 Nov 2023 01:04:27 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "[]"
+						}
+					]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,486 @@
+{
+	"info": {
+		"_postman_id": "90e3a2c2-349f-4022-a6f6-7e1ec9afffc6",
+		"name": "HealthcareAPICollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19740074"
+	},
+	"item": [
+		{
+			"name": "Diagnostics",
+			"item": [
+				{
+					"name": "List Diagnostics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v1",
+								"diagnostics",
+								""
+							]
+						},
+						"description": "LIst Diagnostics."
+					},
+					"response": [
+						{
+							"name": "List Diagnostics",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v1",
+										"diagnostics",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 28 Nov 2023 01:09:34 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "825"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"ID\": 1,\n        \"DateTime\": \"2023-10-13T15:04:05Z\",\n        \"Diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n        \"Prescription\": {\n            \"ID\": 1,\n            \"Description\": \"El paciente debe tomar acetaminofen cada 8 horas durante 1 semana\",\n            \"DueDate\": \"2023-10-20T15:04:05Z\",\n            \"DiagnosticID\": 1\n        },\n        \"Patient\": {\n            \"ID\": 1,\n            \"FirstName\": \"Tavares\",\n            \"LastName\": \"Murphy\",\n            \"Email\": \"bjrPGeJ@KniHdDd.top\",\n            \"DocumentID\": \"5508819842494668\",\n            \"Phone\": \"+892411057638\"\n        }\n    },\n    {\n        \"ID\": 2,\n        \"DateTime\": \"2023-10-13T15:04:05Z\",\n        \"Diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n        \"Prescription\": {\n            \"ID\": 2,\n            \"Description\": \"El paciente debe tomar acetaminofen cada 8 horas durante 1 semana\",\n            \"DueDate\": \"2023-10-20T15:04:05Z\",\n            \"DiagnosticID\": 2\n        },\n        \"Patient\": {\n            \"ID\": 1,\n            \"FirstName\": \"Tavares\",\n            \"LastName\": \"Murphy\",\n            \"Email\": \"bjrPGeJ@KniHdDd.top\",\n            \"DocumentID\": \"5508819842494668\",\n            \"Phone\": \"+892411057638\"\n        }\n    }\n]"
+						},
+						{
+							"name": "Empty list",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v1",
+										"diagnostics",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 28 Nov 2023 01:04:27 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2"
+								}
+							],
+							"cookie": [],
+							"body": "[]"
+						}
+					]
+				},
+				{
+					"name": "Create New Diagnostic",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dateTime\": \"2023-10-13T15:04:05Z\",\n    \"diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n    \"patientID\": 2,\n    \"prescription\": {\n        \"description\": \"El paciente debe tomar acetaminofen cada 8 horas durante 1 semana\",\n        \"dueDate\": \"2023-10-20T15:04:05Z\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v1",
+								"diagnostics",
+								""
+							]
+						},
+						"description": "Create a new diagnostics."
+					},
+					"response": [
+						{
+							"name": "Create New Diagnostic",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"dateTime\": \"2023-10-13T15:04:05Z\",\n    \"diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n    \"patientID\": 1,\n    \"prescription\": {\n        \"description\": \"El paciente debe tomar acetaminofen cada 8 horas durante 1 semana\",\n        \"dueDate\": \"2023-10-20T15:04:05Z\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v1",
+										"diagnostics",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 28 Nov 2023 01:09:08 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "278"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"ID\": 2,\n    \"DateTime\": \"2023-10-13T15:04:05Z\",\n    \"Diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n    \"Prescription\": {\n        \"ID\": 2,\n        \"Description\": \"El paciente debe tomar acetaminofen cada 8 horas durante 1 semana\",\n        \"DueDate\": \"2023-10-20T15:04:05Z\",\n        \"DiagnosticID\": 2\n    },\n    \"PatientID\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Filter Diagnostics",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/?firstName=Macie&lastName=O'Kon&date=2023-10-14",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"v1",
+								"diagnostics",
+								""
+							],
+							"query": [
+								{
+									"key": "firstName",
+									"value": "Macie",
+									"description": "FirstName of patient."
+								},
+								{
+									"key": "lastName",
+									"value": "O'Kon",
+									"description": "LastName of patient."
+								},
+								{
+									"key": "date",
+									"value": "2023-10-14",
+									"description": "Date of diagnostic."
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Filter Diagnostics",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/?firstName=Macie&lastName=O'Kon&date=2023-10-14",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v1",
+										"diagnostics",
+										""
+									],
+									"query": [
+										{
+											"key": "firstName",
+											"value": "Macie",
+											"description": "FirstName of patient."
+										},
+										{
+											"key": "lastName",
+											"value": "O'Kon",
+											"description": "LastName of patient."
+										},
+										{
+											"key": "date",
+											"value": "2023-10-14",
+											"description": "Date of diagnostic."
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 28 Nov 2023 01:22:52 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "410"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"ID\": 4,\n        \"DateTime\": \"2023-10-14T15:04:05Z\",\n        \"Diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n        \"Prescription\": {\n            \"ID\": 4,\n            \"Description\": \"El paciente debe tomar acetaminofen cada 8 horas durante 1 semana\",\n            \"DueDate\": \"2023-10-20T15:04:05Z\",\n            \"DiagnosticID\": 4\n        },\n        \"Patient\": {\n            \"ID\": 2,\n            \"FirstName\": \"Macie\",\n            \"LastName\": \"O'Kon\",\n            \"Email\": \"mJYjPOs@tQXiOQc.org\",\n            \"DocumentID\": \"5530877183006845\",\n            \"Phone\": \"+892613410875\"\n        }\n    }\n]"
+						},
+						{
+							"name": "Filter by FirstName",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/?firstName=Macie",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v1",
+										"diagnostics",
+										""
+									],
+									"query": [
+										{
+											"key": "firstName",
+											"value": "Macie"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 28 Nov 2023 01:12:18 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "410"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"ID\": 3,\n        \"DateTime\": \"2023-10-13T15:04:05Z\",\n        \"Diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n        \"Prescription\": {\n            \"ID\": 3,\n            \"Description\": \"El paciente debe tomar acetaminofen cada 8 horas durante 1 semana\",\n            \"DueDate\": \"2023-10-20T15:04:05Z\",\n            \"DiagnosticID\": 3\n        },\n        \"Patient\": {\n            \"ID\": 2,\n            \"FirstName\": \"Macie\",\n            \"LastName\": \"O'Kon\",\n            \"Email\": \"mJYjPOs@tQXiOQc.org\",\n            \"DocumentID\": \"5530877183006845\",\n            \"Phone\": \"+892613410875\"\n        }\n    }\n]"
+						},
+						{
+							"name": "Filter by LastName",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/?lastName=Murphy",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v1",
+										"diagnostics",
+										""
+									],
+									"query": [
+										{
+											"key": "lastName",
+											"value": "Murphy"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 28 Nov 2023 01:13:16 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "825"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"ID\": 1,\n        \"DateTime\": \"2023-10-13T15:04:05Z\",\n        \"Diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n        \"Prescription\": {\n            \"ID\": 1,\n            \"Description\": \"El paciente debe tomar acetaminofen cada 8 horas durante 1 semana\",\n            \"DueDate\": \"2023-10-20T15:04:05Z\",\n            \"DiagnosticID\": 1\n        },\n        \"Patient\": {\n            \"ID\": 1,\n            \"FirstName\": \"Tavares\",\n            \"LastName\": \"Murphy\",\n            \"Email\": \"bjrPGeJ@KniHdDd.top\",\n            \"DocumentID\": \"5508819842494668\",\n            \"Phone\": \"+892411057638\"\n        }\n    },\n    {\n        \"ID\": 2,\n        \"DateTime\": \"2023-10-13T15:04:05Z\",\n        \"Diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n        \"Prescription\": {\n            \"ID\": 2,\n            \"Description\": \"El paciente debe tomar acetaminofen cada 8 horas durante 1 semana\",\n            \"DueDate\": \"2023-10-20T15:04:05Z\",\n            \"DiagnosticID\": 2\n        },\n        \"Patient\": {\n            \"ID\": 1,\n            \"FirstName\": \"Tavares\",\n            \"LastName\": \"Murphy\",\n            \"Email\": \"bjrPGeJ@KniHdDd.top\",\n            \"DocumentID\": \"5508819842494668\",\n            \"Phone\": \"+892411057638\"\n        }\n    }\n]"
+						},
+						{
+							"name": "Filter by Date",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{protocol}}://{{domain}}:{{port}}/v1/diagnostics/?date=2023-10-14",
+									"protocol": "{{protocol}}",
+									"host": [
+										"{{domain}}"
+									],
+									"port": "{{port}}",
+									"path": [
+										"v1",
+										"diagnostics",
+										""
+									],
+									"query": [
+										{
+											"key": "date",
+											"value": "2023-10-14"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 28 Nov 2023 01:14:31 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "410"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"ID\": 4,\n        \"DateTime\": \"2023-10-14T15:04:05Z\",\n        \"Diagnostic\": \"El paciente está contagiado con el virus de COVID\",\n        \"Prescription\": {\n            \"ID\": 4,\n            \"Description\": \"El paciente debe tomar acetaminofen cada 8 horas durante 1 semana\",\n            \"DueDate\": \"2023-10-20T15:04:05Z\",\n            \"DiagnosticID\": 4\n        },\n        \"Patient\": {\n            \"ID\": 2,\n            \"FirstName\": \"Macie\",\n            \"LastName\": \"O'Kon\",\n            \"Email\": \"mJYjPOs@tQXiOQc.org\",\n            \"DocumentID\": \"5530877183006845\",\n            \"Phone\": \"+892613410875\"\n        }\n    }\n]"
+						}
+					]
+				}
+			],
+			"description": "Patients Diagnostics."
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{domain}}:{{port}}/health/",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{domain}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"health",
+						""
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{protocol}}://{{domain}}:{{port}}/health/",
+							"protocol": "{{protocol}}",
+							"host": [
+								"{{domain}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"health",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "text/plain; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 29 Nov 2023 23:51:13 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "7"
+						}
+					],
+					"cookie": [],
+					"body": "Healthy"
+				}
+			]
+		}
+	]
+}
