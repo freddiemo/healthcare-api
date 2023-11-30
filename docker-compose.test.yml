@@ -23,7 +23,7 @@ services:
   healthcare-api-test:
     build:
       context: .
-      dockerfile: ./Dockerfile.test
+      dockerfile: ./Dockerfile.tests
     depends_on:
       healthcaredb-test:
         condition: service_healthy

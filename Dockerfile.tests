@@ -1,0 +1,16 @@
+FROM golang:1.20-alpine
+
+WORKDIR /app
+
+COPY go.mod go.sum ./
+
+RUN go mod download
+
+COPY . .
+
+RUN go build -o /migrate ./db/migrate/main.go
+
+ENV GO_ENVIRONMENT=TEST
+ENV APP_ROOT=app
+
+ENTRYPOINT ["./entrypoint.tests.sh"]
