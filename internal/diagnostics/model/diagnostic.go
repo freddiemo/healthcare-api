@@ -34,3 +34,11 @@ type DiagnosticQuery struct {
 	LastName  *string    `form:"lastName" binding:"omitempty,min=3,max=20"`
 	Date      *time.Time `form:"date" time_format:"2006-01-02"`
 }
+
+type DiagnosticRequest struct {
+	DeletedAt    gorm.DeletedAt                    `gorm:"index" json:"-"`
+	DateTime     *time.Time                        `binding:"required" gorm:"not null" json:"dateTime"`
+	Diagnostic   string                            `binding:"required,min=10" gorm:"not null" json:"diagnostic"`
+	Prescription prescriptions.PrescriptionRequest `gorm:"foreignKey:DiagnosticID;references:ID" json:",omitempty"`
+	PatientID    uint                              `binding:"required" gorm:"not null" json:"patientID"`
+}

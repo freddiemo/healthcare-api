@@ -15,3 +15,8 @@ type Prescription struct {
 	DueDate      time.Time      `binding:"omitempty" gorm:"not null"`
 	DiagnosticID uint
 }
+
+type PrescriptionRequest struct {
+	Description string    `binding:"omitempty" gorm:"not null"`
+	DueDate     time.Time `binding:"omitempty" gorm:"not null"`
+}
