@@ -7,7 +7,7 @@ import (
 )
 
 type PatientRepository interface {
-	FindById(int) (model.Patient, error)
+	FindById(uint) (model.Patient, error)
 }
 
 type patientRepo struct {
@@ -20,7 +20,7 @@ func NewPatientRepository(db *gorm.DB) PatientRepository {
 	}
 }
 
-func (patientRepo *patientRepo) FindById(id int64) (model.Patient, error) {
+func (patientRepo *patientRepo) FindById(id uint) (model.Patient, error) {
 	var patient model.Patient
 	if result := patientRepo.db.First(&patient, id); result.Error != nil {
 		return patient, result.Error

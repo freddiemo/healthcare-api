@@ -6,7 +6,7 @@ import (
 )
 
 type PatientService interface {
-	FindById(id int64) (model.Patient, error)
+	FindById(id uint) (model.Patient, error)
 }
 
 type patientServ struct {
@@ -21,9 +21,10 @@ func NewPatientService(
 	}
 }
 
-func (service *patientServ) FindById(id int64) (model.Patient, error) {
+func (service *patientServ) FindById(id uint) (model.Patient, error) {
 	var patient model.Patient
-	if patient, err := service.patientRepository.FindById(id); err != nil {
+	patient, err := service.patientRepository.FindById(id)
+	if err != nil {
 		return model.Patient{}, err
 	}
 

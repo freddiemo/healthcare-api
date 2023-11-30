@@ -11,7 +11,7 @@ type Prescription struct {
 	CreatedAt    time.Time      `json:"-"`
 	UpdatedAt    time.Time      `json:"-"`
 	DeletedAt    gorm.DeletedAt `gorm:"index" json:"-"`
-	Description  string         `binding:"required" gorm:"not null"`
-	DueDate      time.Time      `binding:"required" gorm:"not null"`
+	Description  string         `binding:"omitempty" gorm:"not null"`
+	DueDate      time.Time      `binding:"omitempty" gorm:"not null"`
 	DiagnosticID uint
 }

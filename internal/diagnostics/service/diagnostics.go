@@ -8,6 +8,8 @@ import (
 type DiagnosticsService interface {
 	Save(*model.Diagnostic) error
 	Find(*model.DiagnosticQuery) ([]model.DiagnosticWithPatient, error)
+	Delete(id uint) error
+	DeleteAll() error
 }
 
 type diagnosticsServ struct {
@@ -38,4 +40,20 @@ func (service *diagnosticsServ) Find(diagnosticQuery *model.DiagnosticQuery) ([]
 	}
 
 	return diagnostics, nil
+}
+
+func (service *diagnosticsServ) Delete(id uint) error {
+	if err := service.diagnosticsRepository.Delete(id); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func (service *diagnosticsServ) DeleteAll() error {
+	if err := service.diagnosticsRepository.DeleteAll(); err != nil {
+		return err
+	}
+
+	return nil
 }

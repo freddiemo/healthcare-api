@@ -11,6 +11,8 @@ import (
 type DiagnosticsRepository interface {
 	Save(*model.Diagnostic) error
 	Find(*model.DiagnosticQuery) ([]model.DiagnosticWithPatient, error)
+	Delete(id uint) error
+	DeleteAll() error
 }
 
 type diagnosticsRepo struct {
@@ -50,4 +52,23 @@ func (diagnosticRepo *diagnosticsRepo) Find(diagnosticQuery *model.DiagnosticQue
 	}
 
 	return diagnostics, nil
+}
+
+func (diagnosticRepo *diagnosticsRepo) Delete(id uint) error {
+	var diagnostic model.Diagnostic
+	if result := diagnosticRepo.db.Delete(&diagnostic, id); result.Error != nil {
+		return result.Error
+	} else if result.RowsAffected == 0 {
+		return gorm.ErrRecordNotFound
+	}
+
+	return nil
+}
+
+func (diagnosticRepo *diagnosticsRepo) DeleteAll() error {
+	if result := diagnosticRepo.db.Exec("DELETE FROM diagnostics"); result.Error != nil {
+		return result.Error
+	}
+
+	return nil
 }

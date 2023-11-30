@@ -20,7 +20,7 @@ services:
       interval: 3s
       timeout: 5s
       retries: 5
-  healthcare-api:
+  healthcare-api-test:
     build:
       context: .
       dockerfile: ./Dockerfile.test

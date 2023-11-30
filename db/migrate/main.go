@@ -1,11 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/freddiemo/healthcare-api/config"
 	"github.com/freddiemo/healthcare-api/db"
-
 	patientsSeeder "github.com/freddiemo/healthcare-api/db/seeders"
 	diagnostics "github.com/freddiemo/healthcare-api/internal/diagnostics/model"
 	patients "github.com/freddiemo/healthcare-api/internal/patients/model"
@@ -30,4 +30,6 @@ func main() {
 	db.AutoMigrate(&prescriptions.Prescription{})
 
 	db.AutoMigrate(&diagnostics.Diagnostic{})
+
+	fmt.Println("Successfully migrated.")
 }
